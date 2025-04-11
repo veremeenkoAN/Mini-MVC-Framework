@@ -1,0 +1,50 @@
+services:
+  nginx:
+    image : nginx
+    container_name: nginx
+    ports : 
+      - 1000:80
+    volumes : 
+      - ./src:/var/www/public
+      - ./src/nginx:/etc/nginx/conf.d
+    networks :
+      - network10
+    depends_on :
+      - mysql
+      - php
+  php :
+    build: ./config
+    container_name: php
+    volumes : 
+      - ./src:/var/www/public
+    depends_on :
+      - mysql
+    networks :
+      - network10
+  mysql :
+    image : mysql 
+    container_name: mysql
+    environment : 
+      - MYSQL_ROOT_PASSWORD=root 
+    volumes : 
+      - ./src/mysql:/var/lib/mysql
+    networks :
+      - network10
+  phpmyadmin :
+    image : phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+    ports:
+      - 1600:80
+    networks :
+      - network10
+    depends_on :
+      - mysql
+
+networks :
+  network10 :
+    name : network10
+    
+    
+    
