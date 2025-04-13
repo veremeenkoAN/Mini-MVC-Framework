@@ -9,8 +9,9 @@ require_once HELPERS . '/helpers.php';
 use Core\Application;
 
 $app = new Application();
+require_once HELPERS . '/routes.php';
 $app->run();
 
-require_once HELPERS . '/routes.php';
+
 
 
