@@ -28,16 +28,4 @@ class Application
         $this->router->dispatch();
     }
 
-    public static function singleton() : self
-    {
-        if (isset(self::$app)) {
-            return self::$app;
-        }
-        $app = new self();
-        self::$app = $app;
-        return self::$app;
-    }
-
-
-
 }
